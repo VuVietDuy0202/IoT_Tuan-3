@@ -1,0 +1,19 @@
+# Dự án: Điều khiển LED bằng nút nhấn với OneButton
+
+## Giới thiệu
+Dự án này minh họa cách sử dụng thư viện **OneButton** trên Arduino/ESP8266/ESP32 để xử lý nút nhấn với nhiều sự kiện khác nhau mà không cần viết debounce thủ công.
+
+## Chức năng
+- **Single Click**: Bật/Tắt LED (flip trạng thái).
+- **Double Click**: Chuyển LED sang chế độ nhấp nháy (blink).
+- LED sẽ tắt mặc định khi khởi động.
+
+## Phần cứng
+- Board: ESP8266 (NodeMCU v2) hoặc ESP32
+- 1 nút nhấn
+- 1 LED + điện trở hạn dòng
+
+## Cài đặt
+1. Clone repo:
+   ```bash
+   git clone <link-repo-cua-ban>
