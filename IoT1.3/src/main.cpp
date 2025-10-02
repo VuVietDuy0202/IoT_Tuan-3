@@ -1,69 +1,77 @@
 #include <Arduino.h>
 #include "LED.h"
 #include <OneButton.h>
-
-// Hai đối tượng LED
+// --- Khởi tạo LED ---
 LED led1(LED1_PIN, LED1_ACT);
 LED led2(LED2_PIN, LED2_ACT);
 
-// Biến xác định LED nào đang được điều khiển
-// true  -> điều khiển LED1
-// false -> điều khiển LED2
+// --- Biến xác định LED đang điều khiển ---
 bool controlLed1 = true;
 
+// --- Khởi tạo nút ---
 OneButton button(BTN_PIN, !BTN_ACT);
 
-// Đặt các hàm callback
+// --- Hàm callback ---
 void singleClick();
 void doubleClick();
-void longPress();
+void longPressStart();
+void longPressStop();
 
 void setup() {
     led1.off();
     led2.off();
 
+    // Gán callback cho nút
     button.attachClick(singleClick);
     button.attachDoubleClick(doubleClick);
-    button.attachLongPressStart(longPress);
+    button.attachLongPressStart(longPressStart);
+    button.attachLongPressStop(longPressStop);
 }
 
 void loop() {
-    // cập nhật trạng thái LED và xử lý nút
+    // Cập nhật LED và nút
     led1.loop();
     led2.loop();
     button.tick();
 }
 
-// Callback: bấm 1 lần
+// --- Callback: single click ---
 void singleClick() {
     if (controlLed1) {
-        led1.flip();      // bật/tắt LED1
-        led2.on();
-    }
-    else {
-        led2.flip();      // bật/tắt LED2
-        led1.off();
+        led1.flip();  // bật/tắt LED1
+    } else {
+        led2.flip();  // bật/tắt LED2
     }
 }
 
-// Callback: double click => đổi LED đang điều khiển
+// --- Callback: double click ---
 void doubleClick() {
-    controlLed1 = !controlLed1;
+    controlLed1 = !controlLed1; // đổi LED
 
-    // Tùy chọn: báo hiệu chuyển LED bằng cách chớp nhanh
+    // Báo hiệu LED mới bằng nháy nhanh 100ms
     if (controlLed1) {
         led1.blink(100);
-        led2.on();
+        led2.off();
     } else {
         led2.blink(100);
         led1.off();
     }
 }
 
-// Callback: giữ nút => LED hiện tại nhấp nháy 200 ms
-void longPress() {
-    if (controlLed1)
+// --- Callback: giữ nút bắt đầu ---
+void longPressStart() {
+    if (controlLed1) {
         led1.blink(200);
-    else
+    } else {
         led2.blink(200);
+    }
+}
+
+// --- Callback: giữ nút kết thúc ---
+void longPressStop() {
+    if (controlLed1) {
+        led1.off();
+    } else {
+        led2.off();
+    }
 }
