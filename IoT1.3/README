@@ -1,0 +1,32 @@
+# Dự án điều khiển LED bằng nút nhấn
+
+By Vũ Viết Duy  
+
+## 📌 Các chức năng chính
+Sử dụng **một nút bấm** để điều khiển **hai đèn LED** với ba trạng thái khác nhau:
+
+- **Single click**: Bật/tắt đèn LED hiện tại.  
+- **Hold button**: Đèn LED nhấp nháy.  
+- **Double click**: Chuyển giữa 2 đèn LED để điều khiển.  
+
+## ⚡ Phần cứng
+- **ESP32 Devkit v1**  
+  - Chip ESP32 (lõi kép Xtensa)  
+  - LED tích hợp sẵn tại GPIO2 (active HIGH)  
+  - Nút bấm BOOT tại GPIO0 (active LOW)  
+- **1 LED ngoài** (nối qua GPIO bất kỳ, ví dụ D4)  
+- **1 điện trở 220Ω – 1kΩ** (hạn dòng LED)  
+- **1 nút nhấn ngoài**  
+- Breadboard + dây nối  
+
+## 🛠️ Hướng dẫn sử dụng
+1. **Tải dự án về** máy tính.  
+2. **Tạo một project mới** trên PlatformIO hoặc Arduino IDE.  
+3. Copy mã nguồn vào thư mục dự án.  
+4. Build và nạp chương trình vào board ESP32.  
+
+## 📚 Thư viện
+- [OneButton](https://github.com/mathertel/OneButton) – Xử lý nhiều trạng thái từ 1 nút nhấn.  
+
+---
+👉 Dự án phù hợp cho người mới học **ESP32 + PlatformIO**, giúp làm quen với việc xử lý nút nhấn nhiều trạng thái.
